@@ -52,6 +52,10 @@ public class Evolucion {
 			tipos.remove(tipo);
 	}
 	
+	public boolean contieneTipo(String tipo) {
+		return tipos.stream().anyMatch(t->t.toString().equalsIgnoreCase(tipo));
+	}
+	
 	public int getNivel() {
 		return nivel;
 	}

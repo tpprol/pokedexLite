@@ -1,6 +1,7 @@
 package pokedexLite;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
@@ -20,6 +21,10 @@ public class Pokedex implements WithGlobalEntityManager{
 		return entityManager().find(Pokemon.class, nombre);
 	}
 	
+	public void sacarEvolucion(Evolucion evolucion) {
+		entityManager().remove(evolucion);
+	}
+	
 	public void mostrarPokemon(String nombre) {
 		Pokemon pokemon = this.getPokemon(nombre);
 		pokemon.mostrarInformacion();
@@ -28,4 +33,24 @@ public class Pokedex implements WithGlobalEntityManager{
 	public List<Pokemon> gelAllPokemon(){
 		return entityManager().createQuery("from Pokemon", Pokemon.class).getResultList();
 	}
+	
+	public List<Pokemon> gelPokemonesDeTipo(String tipo){
+		return this.gelAllPokemon().stream().filter(poke->poke.contieneTipo(tipo)).collect(Collectors.toList());
+	}
+	
+    public void mostrarPokemones(List<Pokemon> pokemones) {
+        for(int i=0;i<pokemones.size();i++) {
+            System.out.printf("\nPokemon Numero %d\n",i+1);
+            Pokemon pokemon = pokemones.get(i);
+            pokemon.mostrarInformacion();
+        }
+    }
+    
+    public void mostrarTodosLosPokemones() {
+        List<Pokemon> pokemones = Pokedex.instance().gelAllPokemon();
+        if(pokemones.isEmpty())
+        	System.out.printf("No hay Pokemones en la base de datos\n");
+        else
+        	this.mostrarPokemones(pokemones);
+    }
 }

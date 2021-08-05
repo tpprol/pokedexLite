@@ -1,0 +1,2 @@
+3. Agregar Pokemon
+7. Static o no, el main
