@@ -5,24 +5,23 @@ import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-public class Pokedex implements WithGlobalEntityManager{
+public class Pokedex implements WithGlobalEntityManager {
 	private static final Pokedex INSTANCE = new Pokedex();
 	
 	public static Pokedex instance() {
 		return INSTANCE;
 	}
 	
-	public void agregarPokemon(Pokemon pokemon) {
-		pokemon.getEvoluciones().forEach(E->entityManager().persist(E));
-		entityManager().persist(pokemon);
-	}
-
-	public Pokemon getPokemon(String nombre) {
-		return entityManager().find(Pokemon.class, nombre);
+	public void agregarEvolucion(Evolucion evolucion) {
+		entityManager().persist(evolucion);
 	}
 	
 	public void sacarEvolucion(Evolucion evolucion) {
 		entityManager().remove(evolucion);
+	}
+
+	public Pokemon getPokemon(String nombre) {
+		return entityManager().find(Pokemon.class, nombre);
 	}
 	
 	public void mostrarPokemon(String nombre) {
@@ -35,7 +34,7 @@ public class Pokedex implements WithGlobalEntityManager{
 	}
 	
 	public List<Pokemon> gelPokemonesDeTipo(String tipo){
-		return this.gelAllPokemon().stream().filter(poke->poke.contieneTipo(tipo)).collect(Collectors.toList());
+		return this.gelAllPokemon().stream().filter(poke->poke.getTipos().contains(tipo)).collect(Collectors.toList());
 	}
 	
     public void mostrarPokemones(List<Pokemon> pokemones) {

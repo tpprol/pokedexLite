@@ -13,7 +13,6 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import pokedexLite.Evolucion;
 import pokedexLite.Pokedex;
 import pokedexLite.Pokemon;
-import pokedexLite.Tipo;
 
 public class TestPokedex extends AbstractPersistenceTest implements WithGlobalEntityManager {    
     
@@ -36,7 +35,7 @@ public class TestPokedex extends AbstractPersistenceTest implements WithGlobalEn
     	
     	assertEquals("Charmander", pokemon.getNombre());
     	assertEquals(1, pokemon.getNivel());
-    	assertTrue(pokemon.getTipos().contains(Tipo.FUEGO));
+    	assertTrue(pokemon.getTipos().contains("Fuego"));
     }
     
     @Test
@@ -61,16 +60,16 @@ public class TestPokedex extends AbstractPersistenceTest implements WithGlobalEn
     	List<Evolucion> evoluciones = pokemon.getEvoluciones();
     	
     	Evolucion evolucion1 = evoluciones.get(0);
-    	List<Tipo> tiposEvolucion = evolucion1.getTipos();
+    	List<String> tiposEvolucion = evolucion1.getTipos();
 
     	if(evolucion1.getNombre().equals("Charmeleon")) {
         	assertEquals("Charmeleon", evolucion1.getNombre());
-        	assertTrue(tiposEvolucion.contains(Tipo.FUEGO));
+        	assertTrue(tiposEvolucion.contains("Fuego"));
         	assertEquals(16, evolucion1.getNivel());
     	} else {
         	assertEquals("Charizard", evolucion1.getNombre());
-        	assertTrue(tiposEvolucion.contains(Tipo.FUEGO));
-        	assertTrue(tiposEvolucion.contains(Tipo.VOLADOR));
+        	assertTrue(tiposEvolucion.contains("Fuego"));
+        	assertTrue(tiposEvolucion.contains("Volador"));
         	assertEquals(36, evolucion1.getNivel());
     	}
     }
@@ -79,23 +78,21 @@ public class TestPokedex extends AbstractPersistenceTest implements WithGlobalEn
     public void agregarPokemon() {
         Pokemon corphish = new Pokemon("Corphish",10);
         Evolucion evoCrawdaunt = new Evolucion("Crawdaunt",30);
-        evoCrawdaunt.agregarTipo(Tipo.AGUA);
-        evoCrawdaunt.agregarTipo(Tipo.SINIESTRO);
+        evoCrawdaunt.agregarTipo("Agua");
+        evoCrawdaunt.agregarTipo("Siniestro");
         corphish.agregarEvolucion(evoCrawdaunt);
         corphish.agregarHabilidad("Caparazon");
         corphish.agregarHabilidad("Corte fuerte");
-        corphish.agregarTipo(Tipo.AGUA);
-        withTransaction(() -> {Pokedex.instance().agregarPokemon(corphish);});
+        corphish.agregarTipo("Agua");
+        withTransaction(() -> {Pokedex.instance().agregarEvolucion(corphish);});
         
 
     	Pokemon pokemon = Pokedex.instance().getPokemon("Corphish");    	
     	assertEquals(corphish.getNombre(), pokemon.getNombre());
     	assertSame(corphish, pokemon);
-    	
     	withTransaction(() -> {
-    		entityManager().remove(evoCrawdaunt);
-    		entityManager().remove(corphish);
-    		});
+    	Pokedex.instance().sacarEvolucion(evoCrawdaunt);
+    	Pokedex.instance().sacarEvolucion(corphish);});
     }
     
     @Test

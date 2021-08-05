@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.*;
 
@@ -35,18 +36,51 @@ public class Pokemon extends Evolucion {
 		return habilidades;
 	}
 	
+	private void agregarHabilidades(List<String> habilidades){
+		for(int i = 0; i<habilidades.size();i++) {
+			if(!this.habilidades.contains(habilidades.get(i))){
+				this.habilidades.add(habilidades.get(i));
+			}
+		}
+	}
+	
 	public void agregarEvolucion(Evolucion evolucion) {
-		if(!evoluciones.contains(evolucion))
+		if(!evoluciones.contains(evolucion)) {
+			Pokedex.instance().agregarEvolucion(evolucion);
 			evoluciones.add(evolucion);
+		}
+	}
+	
+	private void agregarEvoluciones(List<Evolucion> evoluciones){
+		for(int i = 0; i<evoluciones.size();i++) {
+			if(!this.evoluciones.contains(evoluciones.get(i))){
+				this.evoluciones.add(evoluciones.get(i));
+			}
+		}
 	}
 	
 	public List<Evolucion> getEvoluciones() {
 		return evoluciones;
 	}
 	
-	public void entrenar() {
+	private void agregarTipos(List<String> tipos){
+		for(int i = 0; i<tipos.size();i++) {
+			if(!this.tipos.contains(tipos.get(i))){
+				this.tipos.add(tipos.get(i));
+			}
+		}
+	}
+	
+	public void entrenar(int segundos) {
 		System.out.printf("Entrenando a %s\n",nombre);
-		nivel++;
+		
+		try {
+			TimeUnit.SECONDS.sleep(segundos);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		nivel += segundos;
 		System.out.printf("Termino de entrenar y paso de nivel %d a %d\n", nivel-1, nivel);
 		
 		Evolucion evolucion = cumpleCondicionEvolucion();
@@ -75,16 +109,25 @@ public class Pokemon extends Evolucion {
 		return null;
 	}
 	
-	public void evolucionar() {
-		System.out.printf("Evolucionando a %s\n",nombre);
-		Evolucion evolucion;
-		if((evolucion = cumpleCondicionEvolucion())!=null) {
-			nombre = evolucion.getNombre();
-			tipos = evolucion.getTipos();
+	public Pokemon evolucionar() {
+		Evolucion evolucion = cumpleCondicionEvolucion();
+		if(evolucion!= null) {
+			System.out.printf("Evolucionando a %s\n",nombre);
+			Pokedex.instance().sacarEvolucion(evolucion);
 			evoluciones.remove(evolucion);
-			 Pokedex.instance().sacarEvolucion(evolucion);
-			System.out.printf("Se completo la evoluciono, ahora es %s\n",nombre);
+			
+			Pokemon nuevoPokemon = new Pokemon(evolucion.getNombre(),nivel);
+			nuevoPokemon.agregarHabilidades(habilidades);
+			nuevoPokemon.agregarEvoluciones(evoluciones);
+			nuevoPokemon.agregarTipos(evolucion.getTipos());
+			Pokedex.instance().agregarEvolucion(nuevoPokemon);
+
+			System.out.printf("Se evoluciono a %s. Nuevo pokemon registrado %s\n",nombre, nuevoPokemon.getNombre());
+			Pokedex.instance().sacarEvolucion(this);
+			return nuevoPokemon;
 		}
+		
+		return null;
 	}
 	
 	public void mostrarInformacion() {

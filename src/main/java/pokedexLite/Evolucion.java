@@ -13,10 +13,9 @@ public class Evolucion {
 	@Column(nullable = false, name="Nombre")
 	String nombre;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name="Tipos")
 	@ElementCollection
-	List<Tipo> tipos = new ArrayList<Tipo>();
+	List<String> tipos = new ArrayList<String>();
 	
 	@Column(name="Nivel")
 	int nivel;
@@ -38,22 +37,18 @@ public class Evolucion {
 		this.nombre = nombre;
 	}
 	
-	public List<Tipo> getTipos() {
+	public List<String> getTipos() {
 		return tipos;
 	}
 	
-	public void agregarTipo(Tipo tipo) {
+	public void agregarTipo(String tipo) {
 		if(!tipos.contains(tipo))
 			tipos.add(tipo);
 	}
 	
-	public void sacarTipo(Tipo tipo) {
+	public void sacarTipo(String tipo) {
 		if(tipos.contains(tipo))
 			tipos.remove(tipo);
-	}
-	
-	public boolean contieneTipo(String tipo) {
-		return tipos.stream().anyMatch(t->t.toString().equalsIgnoreCase(tipo));
 	}
 	
 	public int getNivel() {
@@ -65,10 +60,10 @@ public class Evolucion {
 	}
 	
 	public void mostrarTipos() {
-		System.out.printf("Es del tipo: %s",tipos.get(0).name());
+		System.out.printf("Es de tipo: %s",tipos.get(0));
 		
 		for(int i=1; i<tipos.size();i++) {
-			System.out.printf("/%s",tipos.get(i).name());
+			System.out.printf("/%s",tipos.get(i));
 		}
 		
 		System.out.printf("\n");

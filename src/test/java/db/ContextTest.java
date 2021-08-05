@@ -9,7 +9,6 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import pokedexLite.Evolucion;
 import pokedexLite.Pokedex;
 import pokedexLite.Pokemon;
-import pokedexLite.Tipo;
 
 public class ContextTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
@@ -25,184 +24,184 @@ public class ContextTest extends AbstractPersistenceTest implements WithGlobalEn
 	
 	@Test
 	public void llenadoTablas(){
+		
         Pokemon charmander = new Pokemon("Charmander",1);
-        charmander.agregarTipo(Tipo.FUEGO);
+        charmander.agregarTipo("Fuego");
         Evolucion evoCharmeleon = new Evolucion("Charmeleon",16);
-        evoCharmeleon.agregarTipo(Tipo.FUEGO);
-        charmander.agregarEvolucion(evoCharmeleon);
+        evoCharmeleon.agregarTipo("Fuego");
         Evolucion evoCharizard = new Evolucion("Charizard",36);
-        evoCharizard.agregarTipo(Tipo.FUEGO);
-        evoCharizard.agregarTipo(Tipo.VOLADOR);
-        charmander.agregarEvolucion(evoCharizard);
+        evoCharizard.agregarTipo("Fuego");
+        evoCharizard.agregarTipo("Volador");
         charmander.agregarHabilidad("Mar llamas");
         charmander.agregarHabilidad("Poder solar");
 
 
         Pokemon bulbasaur = new Pokemon("Bulbasaur",1);
-        bulbasaur.agregarTipo(Tipo.PLANTA);
-        bulbasaur.agregarTipo(Tipo.VENENO);
+        bulbasaur.agregarTipo("Planta");
+        bulbasaur.agregarTipo("Veneno");
         Evolucion evoIvysaur = new Evolucion("Ivysaur",16);
-        evoIvysaur.agregarTipo(Tipo.PLANTA);
-        evoIvysaur.agregarTipo(Tipo.VENENO);
-        bulbasaur.agregarEvolucion(evoIvysaur);
+        evoIvysaur.agregarTipo("Planta");
+        evoIvysaur.agregarTipo("Veneno");
         Evolucion evoVenusaur = new Evolucion("Venusaur",32);
-        evoVenusaur.agregarTipo(Tipo.PLANTA);
-        evoVenusaur.agregarTipo(Tipo.VENENO);
-        bulbasaur.agregarEvolucion(evoVenusaur);
+        evoVenusaur.agregarTipo("Planta");
+        evoVenusaur.agregarTipo("Veneno");
         bulbasaur.agregarHabilidad("Espesura");
         bulbasaur.agregarHabilidad("Clorofila");
 
         
         Pokemon squirtle = new Pokemon("Squirtle",1);
-        squirtle.agregarTipo(Tipo.AGUA);
+        squirtle.agregarTipo("Agua");
         Evolucion evoWartortle = new Evolucion("Wartortle",16);
-        evoWartortle.agregarTipo(Tipo.AGUA);
-        squirtle.agregarEvolucion(evoWartortle);
+        evoWartortle.agregarTipo("Agua");
         Evolucion evoBlastoise = new Evolucion("Blastoise",36);
-        evoBlastoise.agregarTipo(Tipo.AGUA);
-        squirtle.agregarEvolucion(evoBlastoise);
+        evoBlastoise.agregarTipo("Agua");
         squirtle.agregarHabilidad("Torrente");
         squirtle.agregarHabilidad("Cura lluvia");
         
         
         Pokemon chikorita = new Pokemon("Chikorita",1);
-        chikorita.agregarTipo(Tipo.PLANTA);
+        chikorita.agregarTipo("Planta");
         Evolucion evoBayleef = new Evolucion("Bayleef",16);
-        evoBayleef.agregarTipo(Tipo.PLANTA);
-        chikorita.agregarEvolucion(evoBayleef);
+        evoBayleef.agregarTipo("Planta");
         Evolucion evoMeganium = new Evolucion("Meganium",32);
-        evoMeganium.agregarTipo(Tipo.PLANTA);
-        chikorita.agregarEvolucion(evoMeganium);
+        evoMeganium.agregarTipo("Planta");
         chikorita.agregarHabilidad("Espensura");
         chikorita.agregarHabilidad("Defensa hoja");
 
         
         Pokemon cyndaquil = new Pokemon("Cyndaquil",1);
-        cyndaquil.agregarTipo(Tipo.FUEGO);
+        cyndaquil.agregarTipo("Fuego");
         Evolucion evoQuilava = new Evolucion("Quilava",14);
-        evoQuilava.agregarTipo(Tipo.FUEGO);
-        cyndaquil.agregarEvolucion(evoQuilava);
+        evoQuilava.agregarTipo("Fuego");
         Evolucion evoTyphlosion = new Evolucion("Typhlosion",36);
-        evoTyphlosion.agregarTipo(Tipo.FUEGO);
-        cyndaquil.agregarEvolucion(evoTyphlosion);
+        evoTyphlosion.agregarTipo("Fuego");
         cyndaquil.agregarHabilidad("Mar llamas");
         cyndaquil.agregarHabilidad("Absorbe fuego");
 
         
         Pokemon aron = new Pokemon("Aron",1);
-        aron.agregarTipo(Tipo.ACERO);
-        aron.agregarTipo(Tipo.ROCA);
+        aron.agregarTipo("Acero");
+        aron.agregarTipo("Roca");
         Evolucion evoLairon = new Evolucion("Lairon",32);
-        evoLairon.agregarTipo(Tipo.ACERO);
-        evoLairon.agregarTipo(Tipo.ROCA);
-        aron.agregarEvolucion(evoLairon);
+        evoLairon.agregarTipo("Acero");
+        evoLairon.agregarTipo("Roca");
         Evolucion evoAggron = new Evolucion("Aggron",42);
-        evoAggron.agregarTipo(Tipo.ACERO);
-        evoAggron.agregarTipo(Tipo.ROCA);
-        aron.agregarEvolucion(evoAggron);
+        evoAggron.agregarTipo("Acero");
+        evoAggron.agregarTipo("Roca");
         aron.agregarHabilidad("Robustez");
         aron.agregarHabilidad("Metal pesado");
 
 
         Pokemon snorunt = new Pokemon("Snorunt",1);
-        snorunt.agregarTipo(Tipo.HIELO);
+        snorunt.agregarTipo("Hielo");
         Evolucion evoGlalie = new Evolucion("Glalie",42);
-        evoGlalie.agregarTipo(Tipo.HIELO);
-        snorunt.agregarEvolucion(evoGlalie);
+        evoGlalie.agregarTipo("Hielo");
         snorunt.agregarHabilidad("Foco interno");
         snorunt.agregarHabilidad("Veleta");
 
 
         Pokemon fletchling = new Pokemon("Fletchling",1);
-        fletchling.agregarTipo(Tipo.NORMAL);
-        fletchling.agregarTipo(Tipo.VOLADOR);
+        fletchling.agregarTipo("Normal");
+        fletchling.agregarTipo("Volador");
         Evolucion evoFletchinder = new Evolucion("Fletchinder",17);
-        evoFletchinder.agregarTipo(Tipo.FUEGO);
-        evoFletchinder.agregarTipo(Tipo.VOLADOR);
-        fletchling.agregarEvolucion(evoFletchinder);
+        evoFletchinder.agregarTipo("Fuego");
+        evoFletchinder.agregarTipo("Volador");
         Evolucion evoTalonflame = new Evolucion("Talonflame",35);
-        evoTalonflame.agregarTipo(Tipo.FUEGO);
-        evoTalonflame.agregarTipo(Tipo.VOLADOR);
-        fletchling.agregarEvolucion(evoTalonflame);
+        evoTalonflame.agregarTipo("Fuego");
+        evoTalonflame.agregarTipo("Volador");
         fletchling.agregarHabilidad("Sacapecho");
         fletchling.agregarHabilidad("Alas vendaval");
 
         Pokemon chimchar = new Pokemon("Chimchar",1);
-        chimchar.agregarTipo(Tipo.FUEGO);
+        chimchar.agregarTipo("Fuego");
         Evolucion evoMonferno = new Evolucion("Monferno",14);
-        evoMonferno.agregarTipo(Tipo.FUEGO);
-        evoMonferno.agregarTipo(Tipo.LUCHA);
-        fletchling.agregarEvolucion(evoMonferno);
+        evoMonferno.agregarTipo("Fuego");
+        evoMonferno.agregarTipo("Lucha");
         Evolucion evoInfernape = new Evolucion("Infernape",36);
-        evoInfernape.agregarTipo(Tipo.FUEGO);
-        evoInfernape.agregarTipo(Tipo.LUCHA);
-        chimchar.agregarEvolucion(evoInfernape);
+        evoInfernape.agregarTipo("Fuego");
+        evoInfernape.agregarTipo("Lucha");
         chimchar.agregarHabilidad("Mar llamas");
         chimchar.agregarHabilidad("Puno ferreo");
 
         Pokemon caterpie = new Pokemon("Caterpie",1);
-        caterpie.agregarTipo(Tipo.BICHO);
+        caterpie.agregarTipo("Bicho");
         Evolucion evoMetapod = new Evolucion("Metapod",7);
-        evoMetapod.agregarTipo(Tipo.BICHO);
-        caterpie.agregarEvolucion(evoMetapod);
+        evoMetapod.agregarTipo("Bicho");
         Evolucion evoButterfree = new Evolucion("Butterfree",10);
-        evoButterfree.agregarTipo(Tipo.BICHO);
-        evoButterfree.agregarTipo(Tipo.VOLADOR);
-        caterpie.agregarEvolucion(evoButterfree);
+        evoButterfree.agregarTipo("Bicho");
+        evoButterfree.agregarTipo("Volador");
         caterpie.agregarHabilidad("Polvo escudo");
         caterpie.agregarHabilidad("Fuga");
 
         Pokemon deino = new Pokemon("Deino",1);
-        deino.agregarTipo(Tipo.SINIESTRO);
-        deino.agregarTipo(Tipo.DRAGON);
+        deino.agregarTipo("Siniestro");
+        deino.agregarTipo("Dragon");
         Evolucion evoZweilous = new Evolucion("Zweilous",50);
-        evoZweilous.agregarTipo(Tipo.SINIESTRO);
-        evoZweilous.agregarTipo(Tipo.DRAGON);
-        deino.agregarEvolucion(evoZweilous);
+        evoZweilous.agregarTipo("Siniestro");
+        evoZweilous.agregarTipo("Dragon");
         Evolucion evoHydreigon = new Evolucion("Hydreigon",64);
-        evoHydreigon.agregarTipo(Tipo.SINIESTRO);
-        evoHydreigon.agregarTipo(Tipo.DRAGON);
-        deino.agregarEvolucion(evoHydreigon);
+        evoHydreigon.agregarTipo("Siniestro");
+        evoHydreigon.agregarTipo("Dragon");
         deino.agregarHabilidad("Entusiasmo");
 
         Pokemon ralts = new Pokemon("Ralts",1);
-        ralts.agregarTipo(Tipo.PSIQUICO);
-        ralts.agregarTipo(Tipo.HADA);
+        ralts.agregarTipo("Psiquico");
+        ralts.agregarTipo("Hada");
         Evolucion evoKirlia = new Evolucion("Kirlia",20);
-        evoKirlia.agregarTipo(Tipo.PSIQUICO);
-        evoKirlia.agregarTipo(Tipo.HADA);
-        ralts.agregarEvolucion(evoKirlia);
+        evoKirlia.agregarTipo("Psiquico");
+        evoKirlia.agregarTipo("Hada");
         Evolucion evoGardevoir = new Evolucion("Gardevoir",34);
-        evoGardevoir.agregarTipo(Tipo.PSIQUICO);
-        evoGardevoir.agregarTipo(Tipo.HADA);
-        ralts.agregarEvolucion(evoGardevoir);
+        evoGardevoir.agregarTipo("Psiquico");
+        evoGardevoir.agregarTipo("Hada");
         ralts.agregarHabilidad("Sincronia");
         ralts.agregarHabilidad("Rastro");
 
         Pokemon shuppet = new Pokemon("Shuppet",1);
-        shuppet.agregarTipo(Tipo.FANTASMA);
+        shuppet.agregarTipo("Fantasma");
         Evolucion evoBanette = new Evolucion("Banette",37);
-        evoBanette.agregarTipo(Tipo.FANTASMA);
-        shuppet.agregarEvolucion(evoBanette);
+        evoBanette.agregarTipo("Fantasma");
         shuppet.agregarHabilidad("Insomnio");
         shuppet.agregarHabilidad("Cacheo");
         
-
         withTransaction(() -> {
-        Pokedex.instance().agregarPokemon(charmander);
-        Pokedex.instance().agregarPokemon(bulbasaur);
-        Pokedex.instance().agregarPokemon(squirtle);
-        Pokedex.instance().agregarPokemon(chikorita);
-        Pokedex.instance().agregarPokemon(cyndaquil);
-        Pokedex.instance().agregarPokemon(aron);
-        Pokedex.instance().agregarPokemon(snorunt);
-        Pokedex.instance().agregarPokemon(fletchling);
-        Pokedex.instance().agregarPokemon(chimchar);
-        Pokedex.instance().agregarPokemon(caterpie);
-        Pokedex.instance().agregarPokemon(deino);
-        Pokedex.instance().agregarPokemon(ralts);
-        Pokedex.instance().agregarPokemon(shuppet);});
-        
+        charmander.agregarEvolucion(evoCharmeleon);
+        charmander.agregarEvolucion(evoCharizard);
+        Pokedex.instance().agregarEvolucion(charmander);
+        bulbasaur.agregarEvolucion(evoIvysaur);
+        bulbasaur.agregarEvolucion(evoVenusaur);
+        Pokedex.instance().agregarEvolucion(bulbasaur);
+        squirtle.agregarEvolucion(evoWartortle);
+        squirtle.agregarEvolucion(evoBlastoise);
+        Pokedex.instance().agregarEvolucion(squirtle);
+        chikorita.agregarEvolucion(evoBayleef);
+        chikorita.agregarEvolucion(evoMeganium);
+        Pokedex.instance().agregarEvolucion(chikorita);
+        cyndaquil.agregarEvolucion(evoQuilava);
+        cyndaquil.agregarEvolucion(evoTyphlosion);
+        Pokedex.instance().agregarEvolucion(cyndaquil);
+        aron.agregarEvolucion(evoLairon);
+        aron.agregarEvolucion(evoAggron);
+        Pokedex.instance().agregarEvolucion(aron);
+        snorunt.agregarEvolucion(evoGlalie);
+        Pokedex.instance().agregarEvolucion(snorunt);
+        fletchling.agregarEvolucion(evoFletchinder);
+        fletchling.agregarEvolucion(evoTalonflame);
+        Pokedex.instance().agregarEvolucion(fletchling);
+        chimchar.agregarEvolucion(evoMonferno);
+        chimchar.agregarEvolucion(evoInfernape);
+        Pokedex.instance().agregarEvolucion(chimchar);
+        caterpie.agregarEvolucion(evoMetapod);
+        caterpie.agregarEvolucion(evoButterfree);
+        Pokedex.instance().agregarEvolucion(caterpie);
+        deino.agregarEvolucion(evoZweilous);
+        deino.agregarEvolucion(evoHydreigon);
+        Pokedex.instance().agregarEvolucion(deino);
+        ralts.agregarEvolucion(evoKirlia);
+        ralts.agregarEvolucion(evoGardevoir);
+        Pokedex.instance().agregarEvolucion(ralts);
+        shuppet.agregarEvolucion(evoBanette);
+        Pokedex.instance().agregarEvolucion(shuppet);
+        });
         Pokemon charmander2 =  Pokedex.instance().getPokemon("Charmander");
         assertEquals(charmander2.getNombre(), charmander.getNombre());
         assertSame(charmander2, charmander);

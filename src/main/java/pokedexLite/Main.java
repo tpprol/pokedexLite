@@ -12,13 +12,12 @@ public class Main {
 	static Scanner leer = new Scanner(System.in);
 	
     static public void main(String[] args) {   
+    	System.out.printf("\nBIENVENIDO AL POKEDEX\n");		
     	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
     	EntityTransaction transaction = entityManager.getTransaction();
-    	transaction.begin();
-    	System.out.printf("\nBIENVENIDO AL POKEDEX\n");		
-    	
     	int selector = -1;
     	while(selector!=0) {
+        	transaction.begin();
     		System.out.printf("Escriba el numero de la opcion que le gustaria hacer\n");
     		System.out.printf("\t1. Buscar Pokemon\n");
     		System.out.printf("\t2. Atrapar Pokemon\n");
@@ -40,10 +39,10 @@ public class Main {
     				Pokedex.instance().mostrarTodosLosPokemones();
     				break;
     		}
+			transaction.commit();
     	}
     	
     	System.out.printf("\nGRACIAS POR USAR POKEDEX\n");
-    	transaction.commit();
     }
     
     static public void buscarInformacionPokemon() {
@@ -59,6 +58,8 @@ public class Main {
 				System.out.printf("\t5. Entrenar a %s\n", pokemon.getNombre());
 				System.out.printf("\t6. Evolucionar a %s\n", pokemon.getNombre());
 				System.out.printf("\t7. Que %s aprenda una nueva habilidad\n", pokemon.getNombre());
+				System.out.printf("\t8. Agregar un tipo a %s\n", pokemon.getNombre());
+				System.out.printf("\t9. Agregar una evolucion a %s\n", pokemon.getNombre());
 				System.out.printf("Si quiere volver atras solo ingrese 0\n");
 				selector = Integer.parseInt(leer.nextLine()); 
 				switch(selector){
@@ -78,10 +79,16 @@ public class Main {
     					entrenarPokemon(pokemon);
     					break;
     				case 6:
-    					evolucionarPokemon(pokemon);
+    					pokemon = evolucionarPokemon(pokemon);
     					break;
     				case 7:
     					aprenderHabilidad(pokemon);
+    					break;
+    				case 8:
+    					nuevoTipo(pokemon);
+    					break;
+    				case 9:
+    					agregarEvolucion(pokemon);
     					break;
     			}
     		}
@@ -89,39 +96,89 @@ public class Main {
     }
     
     static public void entrenarPokemon(Pokemon pokemon) {
-    	if(pokemon!=null)
-    		pokemon.entrenar();
+    	System.out.printf("Por cuanto tiempo le gustaria entrenar a %s? Ingreselo en segundos\n",pokemon.getNombre());
+    	int segundos = leer.nextInt();
+        leer.nextLine();
+    	if(segundos>0)
+    		pokemon.entrenar(segundos);
     }
     
-    static public void evolucionarPokemon(Pokemon pokemon) {
-    	if(pokemon!=null)
-    		pokemon.evolucionar();
+    static public Pokemon evolucionarPokemon(Pokemon pokemon) {
+    	Pokemon nuevoPokemon = pokemon.evolucionar();
+    	if(nuevoPokemon!=null)	
+    		return nuevoPokemon;
+    	else
+    		return pokemon;
     }
     
     static public void aprenderHabilidad(Pokemon pokemon) {
-    	System.out.printf("Ingrese el nombre de la habilidad o \"Listo\" si busca cancelar la operacion\n");
+    	System.out.printf("Ingrese el nombre de la habilidad de %s\n", pokemon.getNombre());
     	String nuevaHabilidad = leer.nextLine();
-    	if(!nuevaHabilidad.equals("Listo")) {
-    		pokemon.agregarHabilidad(nuevaHabilidad);
-    		System.out.printf("Se agrego la habilidad %s a %s\n", nuevaHabilidad, pokemon.getNombre());
-		}
+    	
+    	pokemon.agregarHabilidad(nuevaHabilidad);
+    	System.out.printf("Se agrego la habilidad %s a %s\n", nuevaHabilidad, pokemon.getNombre());
     }
     
-    static public void atraparPokemon(){/*
+    static public void nuevoTipo(Evolucion evolucion) {
+    	System.out.printf("Ingrese un tipo para %s\n", evolucion.getNombre());
+    	String tipo = leer.nextLine();
+    	evolucion.agregarTipo(tipo);
+    	System.out.printf("Se agrego el tipo %s a %s\n", tipo, evolucion.getNombre());
+    }
+    
+    static public void agregarEvolucion(Pokemon pokemon) {
+    	System.out.printf("Ingrese la evolucion de %s\n", pokemon.getNombre());
+    	String nombreEvolucion = leer.nextLine();
+    	
+        System.out.printf("Ingrese el nivel necesario para la evolucion %s de %s\n", nombreEvolucion, pokemon.getNombre());
+        int nivelEvolucion = leer.nextInt();
+        leer.nextLine();
+        Evolucion evolucion = new Evolucion(nombreEvolucion, nivelEvolucion);
+    	
+        int decision = 1;
+    	while(decision != 0) {
+    		nuevoTipo(evolucion);
+    		System.out.printf("Ingrese 0 si quiere continuar o 1 si quiere agregar un nuevo tipo\n");
+    		decision = leer.nextInt();
+            leer.nextLine();
+    	}
+        
+        pokemon.agregarEvolucion(evolucion);
+    }
+    
+    static public void atraparPokemon(){
     	System.out.printf("Ingrese el nombre del nuevo Pokemon\n");
     	String nombrePokemon = leer.nextLine();
     	System.out.printf("Ingrese el nivel con el que se atrapo a %s\n",nombrePokemon);
     	int nivelPokemon = leer.nextInt();
+        leer.nextLine();
     	Pokemon pokemon = new Pokemon(nombrePokemon, nivelPokemon);
     	
-    	System.out.printf("Ingrese el tipo o los tipos de %s o si quiere seguir \"Listo\"\n", nombrePokemon);
-    	String leyendo = leer.nextLine();
-    	while(leyendo.equalsIgnoreCase("Listo")) {
-    		Tipo tipo = tipo.valueOf(leyendo);
+    	int decision = 1;
+    	while(decision != 0) {
+    		nuevoTipo(pokemon);
+    		System.out.printf("Ingrese 0 si quiere continuar o 1 si quiere agregar un nuevo tipo\n");
+    		decision= leer.nextInt();
+            leer.nextLine();
     	}
     	
+    	decision = 1;
+    	while(decision != 0) {
+    		aprenderHabilidad(pokemon);
+    		System.out.printf("Ingrese 0 si quiere continuar o 1 si quiere agregar una nueva habilidad\n");
+    		decision= leer.nextInt();
+            leer.nextLine();
+    	}
+		
+    	decision = 1;
+    	while(decision != 0) {
+    		agregarEvolucion(pokemon);
+    		System.out.printf("Ingrese 0 si quiere continuar o 1 si quiere agregar una nueva evolucion\n");
+    		decision= leer.nextInt();
+            leer.nextLine();
+    	}
     	
-    	Pokedex.instance().agregarPokemon(pokemon);*/
+    	Pokedex.instance().agregarEvolucion(pokemon);
     }
     
     static public void pokemonSegunTipo() {
