@@ -27,6 +27,7 @@ public class Interfaz {
     		System.out.printf("\t2. Atrapar Pokemon\n");
     		System.out.printf("\t3. Listar Pokemones de un tipo\n");
     		System.out.printf("\t4. Listar Los Pokemones de la Base De Datos\n");
+    		System.out.printf("\t5. Numero de Pokemones en la base de datos\n");
     		System.out.printf("Si quiere salir del menu principal solo ingrese 0\n");
     		selector = Integer.parseInt(leer.nextLine()); 
     		switch(selector){
@@ -42,6 +43,9 @@ public class Interfaz {
     			case 4:
     				Pokedex.instance().mostrarTodosLosPokemones();
     				break;
+    			case 5:
+    				System.out.printf("Hay registrados %d\n",Pokedex.instance().numeroDePokemones());
+    				break;
     		}
 			transaction.commit();
     	}
@@ -49,7 +53,7 @@ public class Interfaz {
     	System.out.printf("\nGRACIAS POR USAR POKEDEX\n");
 	}
 	
-	static public void buscarInformacionPokemon() {
+	public static void buscarInformacionPokemon() {
 		Pokemon pokemon = buscarPokemon();
 		if(pokemon!=null) {
 			int selector = -1;
@@ -99,7 +103,7 @@ public class Interfaz {
 		}
     }
     
-    static public void entrenarPokemon(Pokemon pokemon) {
+	public static void entrenarPokemon(Pokemon pokemon) {
     	System.out.printf("Por cuanto tiempo le gustaria entrenar a %s? Ingreselo en segundos\n",pokemon.getNombre());
     	int segundos = leer.nextInt();
         leer.nextLine();
@@ -107,7 +111,7 @@ public class Interfaz {
     		pokemon.entrenar(segundos);
     }
     
-    static public Pokemon evolucionarPokemon(Pokemon pokemon) {
+	public static Pokemon evolucionarPokemon(Pokemon pokemon) {
     	Pokemon nuevoPokemon = pokemon.evolucionar();
     	if(nuevoPokemon!=null)	
     		return nuevoPokemon;
@@ -115,7 +119,7 @@ public class Interfaz {
     		return pokemon;
     }
     
-    static public void aprenderHabilidad(Pokemon pokemon) {
+    public static void aprenderHabilidad(Pokemon pokemon) {
     	System.out.printf("Ingrese el nombre de la habilidad de %s\n", pokemon.getNombre());
     	String nuevaHabilidad = leer.nextLine();
     	
@@ -123,14 +127,14 @@ public class Interfaz {
     	System.out.printf("Se agrego la habilidad %s a %s\n", nuevaHabilidad, pokemon.getNombre());
     }
     
-    static public void nuevoTipo(Evolucion evolucion) {
+    public static void nuevoTipo(Evolucion evolucion) {
     	System.out.printf("Ingrese un tipo para %s\n", evolucion.getNombre());
     	String tipo = leer.nextLine();
     	evolucion.agregarTipo(tipo);
     	System.out.printf("Se agrego el tipo %s a %s\n", tipo, evolucion.getNombre());
     }
     
-    static public void agregarEvolucion(Pokemon pokemon) {
+    public static void agregarEvolucion(Pokemon pokemon) {
     	System.out.printf("Ingrese la evolucion de %s\n", pokemon.getNombre());
     	String nombreEvolucion = leer.nextLine();
     	
@@ -150,7 +154,7 @@ public class Interfaz {
         pokemon.agregarEvolucion(evolucion);
     }
     
-    static public void atraparPokemon(){
+    public static void atraparPokemon(){
     	System.out.printf("Ingrese el nombre del nuevo Pokemon\n");
     	String nombrePokemon = leer.nextLine();
     	System.out.printf("Ingrese el nivel con el que se atrapo a %s\n",nombrePokemon);
@@ -185,7 +189,7 @@ public class Interfaz {
     	Pokedex.instance().agregarEvolucion(pokemon);
     }
     
-    static public void pokemonSegunTipo() {
+    public static void pokemonSegunTipo() {
     	System.out.printf("Ingrese el tipo de Pokemon que se busca listar\n");
     	String nombreTipo = leer.nextLine();
     	while(!nombreTipo.equals("Listo")) {
@@ -201,7 +205,7 @@ public class Interfaz {
 		}
     }
     
-    static public Pokemon buscarPokemon() {
+    public static Pokemon buscarPokemon() {
 		System.out.printf("Ingrese el nombre del Pokemon\n");
 		String nombrePokemon = leer.nextLine();
 		while(!nombrePokemon.equals("Listo")) {

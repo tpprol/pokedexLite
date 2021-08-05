@@ -38,7 +38,7 @@ public class Pokemon extends Evolucion {
 		return habilidades;
 	}
 	
-	private void agregarHabilidades(List<String> habilidades){
+	public void agregarHabilidades(List<String> habilidades){
 		for(int i = 0; i<habilidades.size();i++) {
 			if(!this.habilidades.contains(habilidades.get(i))){
 				this.habilidades.add(habilidades.get(i));
@@ -53,7 +53,7 @@ public class Pokemon extends Evolucion {
 		}
 	}
 	
-	private void agregarEvoluciones(List<Evolucion> evoluciones){
+	public void agregarEvoluciones(List<Evolucion> evoluciones){
 		for(int i = 0; i<evoluciones.size();i++) {
 			if(!this.evoluciones.contains(evoluciones.get(i))){
 				this.evoluciones.add(evoluciones.get(i));
@@ -65,25 +65,17 @@ public class Pokemon extends Evolucion {
 		return evoluciones;
 	}
 	
-	private void agregarTipos(List<String> tipos){
-		for(int i = 0; i<tipos.size();i++) {
-			if(!this.tipos.contains(tipos.get(i))){
-				this.tipos.add(tipos.get(i));
-			}
-		}
-	}
-	
 	public void entrenar(int segundos) {
 		System.out.printf("Entrenando a %s\n",nombre);
 		
 		try {
 			TimeUnit.SECONDS.sleep(segundos);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.printf("Error en la espera\n");
 		}
+		System.out.printf("Termino de entrenar y paso de nivel %d", nivel);
 		nivel += segundos;
-		System.out.printf("Termino de entrenar y paso de nivel %d a %d\n", nivel-1, nivel);
+		System.out.printf(" a %d\n", nivel);
 		
 		Evolucion evolucion = cumpleCondicionEvolucion();
 		if(evolucion!=null) {

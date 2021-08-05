@@ -46,6 +46,14 @@ public class Evolucion {
 			tipos.add(tipo);
 	}
 	
+	public void agregarTipos(List<String> tipos){
+		for(int i = 0; i<tipos.size();i++) {
+			if(!this.tipos.contains(tipos.get(i))){
+				this.tipos.add(tipos.get(i));
+			}
+		}
+	}
+	
 	public void sacarTipo(String tipo) {
 		if(tipos.contains(tipo))
 			tipos.remove(tipo);

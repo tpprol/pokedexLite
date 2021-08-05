@@ -49,11 +49,15 @@ public class Pokedex implements WithGlobalEntityManager {
     }
     
     public void mostrarTodosLosPokemones() {
-        List<Pokemon> pokemones = Pokedex.instance().gelAllPokemon();
+        List<Pokemon> pokemones = this.gelAllPokemon();
         if(pokemones.isEmpty())
         	System.out.printf("No hay Pokemones en la base de datos\n");
         else
         	this.mostrarPokemones(pokemones);
+    }
+    
+    public int numeroDePokemones() {
+    	return this.gelAllPokemon().size();
     }
     
     public static void main(String[] args) {  
