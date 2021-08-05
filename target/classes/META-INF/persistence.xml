@@ -7,8 +7,8 @@
 	
 	<persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>pokedexLite.Pokemon</class>
-		<class>pokedexLite.Evolucion</class>
+		<class>pokemon.Pokemon</class>
+		<class>pokemon.Evolucion</class>
 		
 		<properties> 
 			<property name="hibernate.archive.autodetection" value="class"/>        

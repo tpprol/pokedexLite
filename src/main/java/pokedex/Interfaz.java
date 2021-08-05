@@ -44,7 +44,7 @@ public class Interfaz {
     				Pokedex.instance().mostrarTodosLosPokemones();
     				break;
     			case 5:
-    				System.out.printf("Hay registrados %d\n",Pokedex.instance().numeroDePokemones());
+    				System.out.printf("Hay registrados %d Pokemones\n",Pokedex.instance().numeroDePokemones());
     				break;
     		}
 			transaction.commit();
@@ -84,7 +84,7 @@ public class Interfaz {
     					pokemon.mostrarTipos();
     					break;
     				case 5:
-    					entrenarPokemon(pokemon);
+    					pokemon = entrenarPokemon(pokemon);
     					break;
     				case 6:
     					pokemon = evolucionarPokemon(pokemon);
@@ -103,12 +103,15 @@ public class Interfaz {
 		}
     }
     
-	public static void entrenarPokemon(Pokemon pokemon) {
+	public static Pokemon entrenarPokemon(Pokemon pokemon) {
     	System.out.printf("Por cuanto tiempo le gustaria entrenar a %s? Ingreselo en segundos\n",pokemon.getNombre());
     	int segundos = leer.nextInt();
         leer.nextLine();
+        
     	if(segundos>0)
-    		pokemon.entrenar(segundos);
+    		pokemon = pokemon.entrenar(segundos);
+    	
+    	return pokemon;
     }
     
 	public static Pokemon evolucionarPokemon(Pokemon pokemon) {

@@ -65,7 +65,7 @@ public class Pokemon extends Evolucion {
 		return evoluciones;
 	}
 	
-	public void entrenar(int segundos) {
+	public Pokemon entrenar(int segundos) {
 		System.out.printf("Entrenando a %s\n",nombre);
 		
 		try {
@@ -86,8 +86,10 @@ public class Pokemon extends Evolucion {
 			System.out.printf("1. Evolucionar a %s\n",nombre);
 			int numero = in.nextInt();
 			if(numero==1)
-				evolucionar();
+				return evolucionar();
 		}
+		
+		return this;
 	}
 	
 	public Evolucion cumpleCondicionEvolucion() {
@@ -106,7 +108,7 @@ public class Pokemon extends Evolucion {
 	public Pokemon evolucionar() {
 		Evolucion evolucion = cumpleCondicionEvolucion();
 		if(evolucion!= null) {
-			System.out.printf("Evolucionando a %s\n",nombre);
+			System.out.printf("Evolucionando a %s\n",evolucion.getNombre());
 			Pokedex.instance().sacarEvolucion(evolucion);
 			evoluciones.remove(evolucion);
 			
@@ -116,7 +118,7 @@ public class Pokemon extends Evolucion {
 			nuevoPokemon.agregarTipos(evolucion.getTipos());
 			Pokedex.instance().agregarEvolucion(nuevoPokemon);
 
-			System.out.printf("Se evoluciono a %s. Nuevo pokemon registrado %s\n",nombre, nuevoPokemon.getNombre());
+			System.out.printf("Se evoluciono de %s a %s\n",nombre, nuevoPokemon.getNombre());
 			Pokedex.instance().sacarEvolucion(this);
 			return nuevoPokemon;
 		}
