@@ -1,4 +1,4 @@
-package pokedexLite;
+package pokedex;
 
 import java.util.List;
 import java.util.Scanner;
@@ -8,14 +8,18 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
-public class Main {
+import pokemon.Evolucion;
+import pokemon.Pokemon;
+
+
+public class Interfaz {
 	static Scanner leer = new Scanner(System.in);
+	static EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
+	static EntityTransaction transaction = entityManager.getTransaction();
 	
-    static public void main(String[] args) {   
-    	System.out.printf("\nBIENVENIDO AL POKEDEX\n");		
-    	EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
-    	EntityTransaction transaction = entityManager.getTransaction();
-    	int selector = -1;
+	public static void menuPrincipal() {
+		System.out.printf("\nBIENVENIDO AL POKEDEX\n");
+		int selector = -1;
     	while(selector!=0) {
         	transaction.begin();
     		System.out.printf("Escriba el numero de la opcion que le gustaria hacer\n");
@@ -43,9 +47,9 @@ public class Main {
     	}
     	
     	System.out.printf("\nGRACIAS POR USAR POKEDEX\n");
-    }
-    
-    static public void buscarInformacionPokemon() {
+	}
+	
+	static public void buscarInformacionPokemon() {
 		Pokemon pokemon = buscarPokemon();
 		if(pokemon!=null) {
 			int selector = -1;

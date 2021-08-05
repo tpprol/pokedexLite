@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-import pokedexLite.Evolucion;
-import pokedexLite.Pokedex;
-import pokedexLite.Pokemon;
+import pokemon.Evolucion;
+import pokedex.Pokedex;
+import pokemon.Pokemon;
 
 public class ContextTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 

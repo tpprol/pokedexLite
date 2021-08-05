@@ -1,9 +1,12 @@
-package pokedexLite;
+package pokedex;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+import pokemon.Evolucion;
+import pokemon.Pokemon;
 
 public class Pokedex implements WithGlobalEntityManager {
 	private static final Pokedex INSTANCE = new Pokedex();
@@ -51,5 +54,10 @@ public class Pokedex implements WithGlobalEntityManager {
         	System.out.printf("No hay Pokemones en la base de datos\n");
         else
         	this.mostrarPokemones(pokemones);
+    }
+    
+    public static void main(String[] args) {  
+    	Interfaz.menuPrincipal();
+    
     }
 }

@@ -1,4 +1,4 @@
-package pokedexLite;
+package pokemon;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.*;
+
+import pokedex.Pokedex;
 
 @Entity
 @Table(name="Pokemon")

@@ -1,4 +1,4 @@
-package pokedexLite;
+package pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,3 +69,4 @@ public class Evolucion {
 		System.out.printf("\n");
 	}
 }
+
