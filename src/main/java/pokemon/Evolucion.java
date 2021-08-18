@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Evolucion {
 	@Id
-	@Column(nullable = false, name="Nombre")
+	@Column(nullable = false, name="NombreEvo")
 	String nombre;
 	
 	@Column(name="Tipos")

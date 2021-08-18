@@ -1,6 +1,7 @@
 package TestPokedex;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -34,7 +35,6 @@ public class TestPokedex extends AbstractPersistenceTest implements WithGlobalEn
     	Pokemon pokemon = Pokedex.instance().getPokemon(nombrePokemon);
     	
     	assertEquals("Charmander", pokemon.getNombre());
-    	assertEquals(1, pokemon.getNivel());
     	assertTrue(pokemon.getTipos().contains("Fuego"));
     }
     
@@ -84,26 +84,33 @@ public class TestPokedex extends AbstractPersistenceTest implements WithGlobalEn
         corphish.agregarHabilidad("Caparazon");
         corphish.agregarHabilidad("Corte fuerte");
         corphish.agregarTipo("Agua");
-        withTransaction(() -> {Pokedex.instance().agregarEvolucion(corphish);});
+        Pokedex.instance().agregarEvolucion(corphish);
+        entityManager().getTransaction().commit();
         
 
     	Pokemon pokemon = Pokedex.instance().getPokemon("Corphish");    	
     	assertEquals(corphish.getNombre(), pokemon.getNombre());
     	assertSame(corphish, pokemon);
-    	withTransaction(() -> {
+    	
+    	entityManager().getTransaction().begin();
+    	Pokedex.instance().sacarEvolucion(corphish);
     	Pokedex.instance().sacarEvolucion(evoCrawdaunt);
-    	Pokedex.instance().sacarEvolucion(corphish);});
+    	entityManager().getTransaction().commit();
     }
     
     @Test
     public void actualizarPokemon() {
     	String nombrePokemon = "Charmander";
     	Pokemon pokemon = Pokedex.instance().getPokemon(nombrePokemon);
-    	withTransaction(() -> {pokemon.setNivel(10);});
+    	assertNotNull(pokemon);
+    	pokemon.setNivel(10);
+    	entityManager().getTransaction().commit();
     	
     	Pokemon pokemon2 = Pokedex.instance().getPokemon(nombrePokemon);
     	assertEquals(10, pokemon2.getNivel());
     	
-    	withTransaction(() -> {pokemon.setNivel(1);});
+    	entityManager().getTransaction().begin();
+    	pokemon.setNivel(1);
+    	entityManager().getTransaction().commit();
     }
 }
