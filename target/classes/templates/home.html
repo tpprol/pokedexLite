@@ -8,10 +8,23 @@
 		<div class="jumbotron">
   			<h1 class="text-center">Bienvenido a la Pokedex</h1>
 		</div>
-		<div class="d-grid gap-2 col-8 mx-auto my-3">
-			<a th:href="@{/agregarPokemon}" role="button" class="btn btn-primary my-3">Agregar Pokemon</a>
-			<a th:href="@{/agregarPokemon}" role="button" class="btn btn-primary my-3">Buscar Pokemon</a>
-			<a th:href="@{/listarPokemon}" role="button" class="btn btn-primary my-3">Listar Pokemones de la Base de Datos</a>
+  			<p class="h4 text-center"> Listado de Pokemones en la Base de Datos</p>
+		<section th:replace="layout/navBar :: navBar"></section>
+		<div th:if="${pokemones != null and !pokemones.empty}" class="container col-10" style="left: 10%;">
+			<table class="table table-stripped table-bordered">
+				<tr class="table-dark">
+					<th>#</th>
+					<th>Nombre</th>
+					<th>Nivel</th>
+					<th>Informacion</th>
+				</tr>
+				<tr th:each="pokemon, contador : ${pokemones}" class="table-light">
+					<td class="col-1">[[${contador.count}]]</td>
+					<td th:text="${pokemon.nombre}" class="col-1">nombre</td>
+					<td th:text="${pokemon.nivel}" class="col-1">nivel</td>
+					<td><a th:href="@{/pokemon/} + ${pokemon.nombre}" role="button" class="btn btn-outline-primary"/>Ver Informacion</td>
+				</tr>
+			</table>
 		</div>
 		<section th:replace="layout/plantilla :: sriptsAgregados"></section>
 	</body>

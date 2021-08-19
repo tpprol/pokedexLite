@@ -1,5 +1,7 @@
 package pokedex;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,8 +66,13 @@ public class Pokedex implements WithGlobalEntityManager {
     	return this.gelAllPokemon().size();
     }
     
+    public List<String> getTipos() {
+    	List<String> tipos = this.gelAllPokemon().stream().map(poke->poke.getTipos()).flatMap(tip->tip.stream()).collect(Collectors.toList());
+    	LinkedHashSet<String> hashSet = new LinkedHashSet<>(tipos);
+    	return new ArrayList<>(hashSet);
+    }
+    
     public static void main(String[] args) {  
     	Interfaz.menuPrincipal();
-    
     }
 }
