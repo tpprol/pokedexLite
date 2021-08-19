@@ -1,0 +1,28 @@
+<html xmlns:th="htpp://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<!-- CSS only -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="jumbotron">
+  			<h1 class="text-center">Agregar el pokemon atrapado</h1>
+		</div>
+		
+		<form th:action="@{/guardar}" method="post" th:object="${pokemon}" class="form-floating m-5">
+		  <div class="mb-3">
+		    <label for="nombre" class="form-label">Nombre del Pokemon</label>
+		    <input type="nombre" name="nombre" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+		  </div>
+		  <div class="mb-3">
+		    <label for="nivel" class="form-label">Nivel actual</label>
+		    <input for="nivel" class="form-control" id="exampleInputPassword1">
+		  </div>
+		  <button type="submit" class="btn btn-primary" name="guardar" value="Guardar">Guardar</button>
+		</form>
+		<div class="d-grid gap-2 col-1 ms-auto me-5">
+			<a th:href="@{/}"  role="button" class="btn btn-outline-dark btn-sm">Regresar</a>
+		</div>
+		<section th:replace="layout/plantilla :: sriptsAgregados"></section>
+	</body>
+</html>

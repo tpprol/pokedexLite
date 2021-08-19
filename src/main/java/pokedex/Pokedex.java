@@ -24,7 +24,11 @@ public class Pokedex implements WithGlobalEntityManager {
 	}
 
 	public Pokemon getPokemon(String nombre) {
-		return entityManager().find(Pokemon.class, nombre);
+		try {
+			return entityManager().find(Pokemon.class, nombre);
+		} catch (IllegalArgumentException e){
+			return null;
+		}
 	}
 	
 	public void mostrarPokemon(String nombre) {

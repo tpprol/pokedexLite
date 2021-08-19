@@ -1,0 +1,32 @@
+<html xmlns:th="htpp://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<!-- CSS only -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="jumbotron">
+  			<h1 class="text-center">Listado de Pokemones en la Base de Datos</h1>
+		</div>
+		<div th:if="${pokemones != null and !pokemones.empty}" class="container">
+			<table class="table table-stripped table-bordered">
+				<tr class="table-dark">
+					<th>#</th>
+					<th>Nombre</th>
+					<th>Nivel</th>
+					<th>Informacion</th>
+				</tr>
+				<tr th:each="pokemon, contador : ${pokemones}">
+					<td>[[${contador.count}]]</td>
+					<td th:text="${pokemon.nombre}">nombre</td>
+					<td th:text="${pokemon.nivel}">nivel</td>
+					<td><a th:href="@{/pokemon/} + ${pokemon.nombre}" role="button" class="btn btn-outline-primary"/>Ver Informacion</td>
+				</tr>
+			</table>
+		</div>
+		<div class="d-grid gap-2 col-1 ms-auto me-5">
+			<a th:href="@{/}"  role="button" class="btn btn-outline-dark btn-sm">Regresar</a>
+		</div>
+		<section th:replace="layout/plantilla :: sriptsAgregados"></section>
+	</body>
+</html>
