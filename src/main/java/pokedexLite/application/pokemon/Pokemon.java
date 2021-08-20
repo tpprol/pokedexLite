@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import pokedexLite.application.pokedex.Pokedex;
+
+
 
 @Entity
 @Table(name="Pokemon")
@@ -54,11 +57,13 @@ public class Pokemon extends Evolucion {
 		}
 	}
 	
-	public void agregarEvolucion(Evolucion evolucion) {
+	public boolean agregarEvolucion(Evolucion evolucion) {
 		if(!evoluciones.contains(evolucion)) {
-			//Pokedex.instance().agregarEvolucion(evolucion);
 			evoluciones.add(evolucion);
+			return true;
 		}
+		
+		return false;
 	}
 	
 	public void agregarEvoluciones(List<Evolucion> evoluciones){
@@ -90,7 +95,11 @@ public class Pokemon extends Evolucion {
 		return this.proximaEvolucion().getNombre();
 	}
 	
-	public Pokemon entrenar(int segundos) {/*
+	public void subirNivel(int niveles) {
+		nivel += niveles;
+	}
+	
+	public Pokemon entrenar(int segundos) {
 		System.out.printf("Entrenando a %s\n",nombre);
 		
 		try {
@@ -99,7 +108,7 @@ public class Pokemon extends Evolucion {
 			System.out.printf("Error en la espera\n");
 		}
 		System.out.printf("Termino de entrenar y paso de nivel %d", nivel);
-		nivel += segundos;
+		this.subirNivel(segundos);
 		System.out.printf(" a %d\n", nivel);
 		
 		Evolucion evolucion = cumpleCondicionEvolucion();
@@ -112,8 +121,8 @@ public class Pokemon extends Evolucion {
 			int numero = in.nextInt();
 			if(numero==1)
 				return evolucionar();
-		}*/
-		nivel += segundos;
+		}
+		
 		return this;
 	}
 	
@@ -130,7 +139,7 @@ public class Pokemon extends Evolucion {
 		return null;
 	}
 	
-	public Pokemon evolucionar() {/*
+	public Pokemon evolucionar() {
 		Evolucion evolucion = cumpleCondicionEvolucion();
 		if(evolucion!= null) {
 			System.out.printf("Evolucionando a %s\n",evolucion.getNombre());
@@ -147,7 +156,6 @@ public class Pokemon extends Evolucion {
 			Pokedex.instance().sacarEvolucion(this);
 			return nuevoPokemon;
 		}
-		*/
 		return null;
 	}
 	

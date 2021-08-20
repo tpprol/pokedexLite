@@ -22,6 +22,11 @@ public class Pokedex implements WithGlobalEntityManager {
 	public void sacarEvolucion(Evolucion evolucion) {
 		entityManager().remove(evolucion);
 	}
+	
+	public void agregarEvolucionAPokemon(Evolucion evolucion, Pokemon pokemon) {
+		if(pokemon.agregarEvolucion(evolucion))
+			entityManager().persist(evolucion);
+	}
 
 	public Pokemon getPokemon(String nombre) {
 		return entityManager().find(Pokemon.class, nombre);

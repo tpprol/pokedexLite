@@ -50,6 +50,9 @@ public class PokemonServiceImpl implements PokemonService {
 	
 	@Override
 	public List<Pokemon> listarPokemonesPorNombre(String nombre) {
+		if(nombre.isEmpty() || nombre == null)
+			return this.listarPokemones();
+		
     	return this.listarPokemones().stream().filter(pok->pok.getNombre().contains(nombre)).collect(Collectors.toList());
 	}
 	

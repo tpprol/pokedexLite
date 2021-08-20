@@ -25,13 +25,11 @@ public class HomeController {
 	
     @GetMapping("/")
     public String homePage(@RequestParam(value = "nombre", required = false) String nombre, Model model) {
-    	try{
-    		model.addAttribute("pokemones", pokemonService.listarPokemonesPorNombre(nombre));
-    	} catch(Exception e){
-    		model.addAttribute("pokemones", pokemonService.listarPokemones());
-    	}
-        
-    	model.addAttribute("pokemones",pokemonService.listarPokemones());
+	    	try{
+	    		model.addAttribute("pokemones", pokemonService.listarPokemonesPorNombre(nombre));
+	    	} catch(Exception e){
+	    		model.addAttribute("pokemones", pokemonService.listarPokemones());
+	    	}
     	model.addAttribute("tipos", pokemonService.listarTipos());
         return "home";
     }
@@ -108,7 +106,7 @@ public class HomeController {
       Pokemon pokemon = pokemonService.encontrarPokemon(idPokemon);
       model.addAttribute("tiempo", tiempo);
 
-      pokemon.entrenar(tiempo);
+      pokemon.subirNivel(tiempo);
       pokemonService.guardar(pokemon);
       
       return "redirect:/pokemon/"+idPokemon;
