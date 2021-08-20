@@ -10,19 +10,19 @@
 		</div>
   			<p class="h4 text-center"> Listado de Pokemones en la Base de Datos</p>
 		<section th:replace="layout/navBar :: navBar"></section>
-		<div th:if="${pokemones != null and !pokemones.empty}" class="container col-10" style="left: 10%;">
+		<div th:if="${pokemones != null and !pokemones.empty}" class="container col-5" style="left: 10%;">
 			<table class="table table-stripped table-bordered">
 				<tr class="table-dark">
 					<th>#</th>
 					<th>Nombre</th>
 					<th>Nivel</th>
-					<th>Informacion</th>
+					<th>Mas informacion</th>
 				</tr>
 				<tr th:each="pokemon, contador : ${pokemones}" class="table-light">
 					<td class="col-1">[[${contador.count}]]</td>
-					<td th:text="${pokemon.nombre}" class="col-1">nombre</td>
+					<td th:text="${pokemon.nombre}" class="col-3">nombre</td>
 					<td th:text="${pokemon.nivel}" class="col-1">nivel</td>
-					<td><a th:href="@{/pokemon/} + ${pokemon.nombre}" role="button" class="btn btn-outline-primary"/>Ver Informacion</td>
+					<td>Habilidades, Tipos, Evoluciones: <a th:href="@{/pokemon/} + ${pokemon.nombre}" role="button" class="btn btn-outline-primary">Ver Informacion</a></td>
 				</tr>
 			</table>
 		</div>

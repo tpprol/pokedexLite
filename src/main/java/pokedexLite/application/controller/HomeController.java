@@ -54,8 +54,8 @@ public class HomeController {
     }
     
     @PostMapping("/guardar")
-    public String agregarPokemon(Pokemon pokemon) {
-    	
+    public String agregarPokemon(@ModelAttribute Pokemon pokemon, Model model) {
+    	model.addAttribute("pokemon",pokemon);
     	pokemonService.guardar(pokemon);
     	return "redirect:/pokemon/" + pokemon.getNombre();
     }
