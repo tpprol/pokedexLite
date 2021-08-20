@@ -1,4 +1,4 @@
-package pokedex;
+package pokedexLite.application.pokedex;
 
 import java.util.List;
 import java.util.Scanner;
@@ -8,11 +8,10 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 
-import pokemon.Evolucion;
-import pokemon.Pokemon;
+import pokedexLite.application.pokemon.Evolucion;
+import pokedexLite.application.pokemon.Pokemon;
 
-
-public class Interfaz {
+public class Pantalla {
 	static Scanner leer = new Scanner(System.in);
 	static EntityManager entityManager = PerThreadEntityManagers.getEntityManager();
 	static EntityTransaction transaction = entityManager.getTransaction();

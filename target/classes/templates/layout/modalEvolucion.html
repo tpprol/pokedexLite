@@ -1,0 +1,39 @@
+<html xmlns:th="htpp://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<!-- CSS only -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	</head>
+	<body>
+		<section th:fragment="modalEvolucion">
+			<div class="modal fade" id="agregarEvolucion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="agregarEvolucionLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="agregarEvolucionLabel">Agregar Evolucion de [[${pokemon.nombre}]]</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<form th:action="@{/pokemon/} + ${pokemon.nombre}+@{/nuevaEvolucion}" method="post" th:object="${evolucion}" class="was-validate">
+							<div class="modal-body">
+								<div class="form-group">
+								    <label for="validationDefault01" class="form-label">Nombre de la Evolucion</label>
+								    <input type="text" class="form-control" id="validationDefault01" name="nombre" th:field="*{nombre}" required>
+								</div>
+								<div class="form-group mt-4">
+								    <label for="validationDefault02" class="form-label">Nivel necesario para la Evolucion</label>
+								    <input type="number" class="form-control" id="validationDefault02" name="nivel" th:field="*{nivel}" required>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+								<button type="submit" class="btn btn-primary" name="guardar" value="Guardar">Guardar Cambios</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section th:replace="layout/plantilla :: sriptsAgregados"></section>
+	</body>
+</html>

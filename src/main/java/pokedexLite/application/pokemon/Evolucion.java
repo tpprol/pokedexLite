@@ -1,14 +1,15 @@
-package pokemon;
+package pokedexLite.application.pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name="Evolucion")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Evolucion {
+public class Evolucion{
 	@Id
 	@Column(nullable = false, name="NombreEvo")
 	String nombre;
@@ -19,7 +20,7 @@ public class Evolucion {
 	
 	@Column(name="Nivel")
 	int nivel;
-	
+
 	public Evolucion() {
 		
 	}
@@ -77,4 +78,3 @@ public class Evolucion {
 		System.out.printf("\n");
 	}
 }
-

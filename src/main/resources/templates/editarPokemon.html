@@ -6,17 +6,16 @@
 	</head>
 	<body>
 		<div class="jumbotron">
-  			<h1 class="text-center">Agregar el pokemon atrapado</h1>
+  			<h1 class="text-center">Editar informacion del Pokemon</h1>
 		</div>
-		
 		<form th:action="@{/guardar}" method="post" th:object="${pokemon}" class="form-floating m-5">
 		  <div class="mb-3">
-		    <label for="nombre" class="form-label">Nombre del Pokemon</label>
-		    <input type="nombre" name="nombre" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+		    <label for="validationDefault01" class="form-label">Nombre del Pokemon</label>
+		    <input type="text" class="form-control" id="validationDefault01" name="nombrePokemon" th:field="*{nombre}" required/>
 		  </div>
 		  <div class="mb-3">
-		    <label for="nivel" class="form-label">Nivel actual</label>
-		    <input for="nivel" class="form-control" id="exampleInputPassword1">
+		    <label for="validationDefault02" class="form-label">Nivel actual</label>
+		    <input type="number" class="form-control" id="validationDefault02" name="nivelPokemon" th:field="*{nivel}" required/>
 		  </div>
 		  <button type="submit" class="btn btn-primary" name="guardar" value="Guardar">Guardar</button>
 		</form>

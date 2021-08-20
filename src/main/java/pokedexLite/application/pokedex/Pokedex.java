@@ -1,14 +1,12 @@
-package pokedex;
+package pokedexLite.application.pokedex;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import pokemon.Evolucion;
-import pokemon.Pokemon;
+import pokedexLite.application.pokemon.Evolucion;
+import pokedexLite.application.pokemon.Pokemon;
 
 public class Pokedex implements WithGlobalEntityManager {
 	private static final Pokedex INSTANCE = new Pokedex();
@@ -26,11 +24,7 @@ public class Pokedex implements WithGlobalEntityManager {
 	}
 
 	public Pokemon getPokemon(String nombre) {
-		try {
-			return entityManager().find(Pokemon.class, nombre);
-		} catch (IllegalArgumentException e){
-			return null;
-		}
+		return entityManager().find(Pokemon.class, nombre);
 	}
 	
 	public void mostrarPokemon(String nombre) {
@@ -66,13 +60,8 @@ public class Pokedex implements WithGlobalEntityManager {
     	return this.gelAllPokemon().size();
     }
     
-    public List<String> getTipos() {
-    	List<String> tipos = this.gelAllPokemon().stream().map(poke->poke.getTipos()).flatMap(tip->tip.stream()).collect(Collectors.toList());
-    	LinkedHashSet<String> hashSet = new LinkedHashSet<>(tipos);
-    	return new ArrayList<>(hashSet);
-    }
-    
     public static void main(String[] args) {  
-    	Interfaz.menuPrincipal();
+    	Pantalla.menuPrincipal();
+    
     }
 }

@@ -1,4 +1,4 @@
-package pokemon;
+package pokedexLite.application.pokemon;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,9 +6,13 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import pokedex.Pokedex;
 
 @Entity
 @Table(name="Pokemon")
@@ -16,15 +20,19 @@ public class Pokemon extends Evolucion {
 	@ElementCollection
 	@CollectionTable(name="Habilidades")
 	List<String> habilidades = new ArrayList<String>();
-	
+
 	@OneToMany
-	@JoinColumn(name="PreEvolucion")
+	@JoinColumn(name="EvolucionActual")
 	List<Evolucion> evoluciones = new ArrayList<Evolucion>();
 	
 	public Pokemon() {
 		
 	}
 	
+	public void setEvoluciones(List<Evolucion> evoluciones) {
+		this.evoluciones = evoluciones;
+	}
+
 	public Pokemon(String nombre, int nivel) {
 		super(nombre, nivel);
 	}
@@ -48,7 +56,7 @@ public class Pokemon extends Evolucion {
 	
 	public void agregarEvolucion(Evolucion evolucion) {
 		if(!evoluciones.contains(evolucion)) {
-			Pokedex.instance().agregarEvolucion(evolucion);
+			//Pokedex.instance().agregarEvolucion(evolucion);
 			evoluciones.add(evolucion);
 		}
 	}
@@ -65,7 +73,24 @@ public class Pokemon extends Evolucion {
 		return evoluciones;
 	}
 	
-	public Pokemon entrenar(int segundos) {
+	public Evolucion proximaEvolucion() {
+		return evoluciones.stream().min(Comparator.comparing(Evolucion::getNivel)).orElse(new Evolucion());
+	}
+	
+	public int getNivelNecesario() {
+		if(evoluciones.isEmpty())
+			return 0;
+		
+		return this.proximaEvolucion().getNivel();
+	}
+	
+	public String getProximaEvolucion() {
+		if(evoluciones.isEmpty())
+			return null;
+		return this.proximaEvolucion().getNombre();
+	}
+	
+	public Pokemon entrenar(int segundos) {/*
 		System.out.printf("Entrenando a %s\n",nombre);
 		
 		try {
@@ -87,8 +112,8 @@ public class Pokemon extends Evolucion {
 			int numero = in.nextInt();
 			if(numero==1)
 				return evolucionar();
-		}
-		
+		}*/
+		nivel += segundos;
 		return this;
 	}
 	
@@ -105,7 +130,7 @@ public class Pokemon extends Evolucion {
 		return null;
 	}
 	
-	public Pokemon evolucionar() {
+	public Pokemon evolucionar() {/*
 		Evolucion evolucion = cumpleCondicionEvolucion();
 		if(evolucion!= null) {
 			System.out.printf("Evolucionando a %s\n",evolucion.getNombre());
@@ -122,7 +147,7 @@ public class Pokemon extends Evolucion {
 			Pokedex.instance().sacarEvolucion(this);
 			return nuevoPokemon;
 		}
-		
+		*/
 		return null;
 	}
 	

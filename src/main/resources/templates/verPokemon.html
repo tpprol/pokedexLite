@@ -23,35 +23,68 @@
 		     	<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 					<p class="h5">Nivel de [[${pokemon.nombre}]]</p>
   					<p>El nivel de [[${pokemon.nombre}]] es [[${pokemon.nivel}]].</p>
-  					<p>Entrenar.</p>
+  					<p>El nivel necesario para evolucionar en [[${pokemon.proximaEvolucion}]] es [[${pokemon.nivelNecesario}]]</p>
+					<button type="button" class="btn btn-outline-primary col-2" data-bs-toggle="modal" data-bs-target="#entrenar">
+	  					Entrenar
+					</button>
 				</div>
 		    	<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-		    		<p class="h5">Habilidades de [[${pokemon.nombre}]]</p>
-  					<ul th:each="habilidad : ${pokemon.habilidades}">
-  						<li>[[${habilidad}]]</li>
-  					</ul>
+		    		<div th:if="${pokemon.habilidades != null and !pokemon.habilidades.empty}">
+		    			<p class="h5">Habilidades aprendidas de [[${pokemon.nombre}]]</p>
+	  					<ul th:each="habilidad : ${pokemon.habilidades}">
+	  						<li>[[${habilidad}]]</li>
+	  					</ul>
+					</div>
+		      		<div th:if="${pokemon.habilidades == null or pokemon.habilidades.empty}">
+	  					<p class="h5">[[${pokemon.nombre}]] no tiene ninguna habilidad registrada</p>
+					</div>
+					<button type="button" class="btn btn-outline-primary col-7" data-bs-toggle="modal" data-bs-target="#agregarHabilidad">
+	  					Agregar Habilidad
+					</button>
 		    	</div>
 		      	<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-  					<p class="h5">Habilidades de [[${pokemon.nombre}]]</p>
-  					<ul th:each="tipo : ${pokemon.tipos}">
-  						<li>[[${tipo}]]</li>
-  					</ul>
+		      		<div th:if="${pokemon.tipos != null and !pokemon.tipos.empty}">
+	  					<p class="h5">Tipos que posee [[${pokemon.nombre}]]</p>
+	  					<ul th:each="tipo : ${pokemon.tipos}">
+	  						<li>[[${tipo}]]</li>
+	  					</ul>
+					</div>
+		      		<div th:if="${pokemon.tipos == null or pokemon.tipos.empty}">
+	  					<p class="h5">[[${pokemon.nombre}]] no tiene ningun tipo registrado</p>
+					</div>
+					<button type="button" class="btn btn-outline-primary col-7" data-bs-toggle="modal" data-bs-target="#agregarTipo">
+	  					Agregar Tipo a [[${pokemon.nombre}]]
+					</button>
 		    	</div>
 		      	<div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-		    		<p class="h5">Evoluciones de [[${pokemon.nombre}]]</p>
-  					<ul class="list-group list-group-flush" th:each="evolucion : ${pokemon.evoluciones}">
-  						<li class="list-group-item"><span class="h6">[[${evolucion.nombre}]]</span>.
-  							</br><span class="ms-3">El nivel necesario para la evolucion es [[${evolucion.nivel}]].</span>
-  							</br><span class="ms-3">Es de los siguientes tipos:</span>
-	  							<ul th:each="tipo : ${evolucion.tipos}" class="ms-3">
-	  								<li>[[${tipo}]]</li>
-	  							</ul>
-  						</li>
-  					</ul>
-		    	</div>
+		      		<div th:if="${pokemon.evoluciones != null and !pokemon.evoluciones.empty}">
+			    		<p class="h5">Evoluciones de [[${pokemon.nombre}]]</p>
+	  					<ul class="list-group list-group-flush" th:each="evolucion : ${pokemon.evoluciones}">
+	  						<li class="list-group-item"><span class="h6">[[${evolucion.nombre}]]</span>.
+	  							</br><span class="ms-3">El nivel necesario para la evolucion es [[${evolucion.nivel}]].</span>
+	  							</br><span class="ms-3">Es de los siguientes tipos:</span>
+		  							<ul th:each="tipo : ${evolucion.tipos}" class="ms-3">
+		  								<li>[[${tipo}]]</li>
+		  							</ul>
+	  						</li>
+	  					</ul>
+					</div>
+		      		<div th:if="${pokemon.evoluciones == null or pokemon.evoluciones.empty}">
+	  					<p class="h5">[[${pokemon.nombre}]] no tiene ninguna evolucion registrada</p>
+					</div>
+					<button type="button" class="btn btn-outline-primary col-7" data-bs-toggle="modal" data-bs-target="#agregarEvolucion">
+	  					Agregar Evolucion
+					</button>
+				</div>
 		    </div>
 		  </div>
 		</div>
+		
+		<section th:replace="layout/modalEvolucion :: modalEvolucion"></section>
+		<section th:replace="layout/modalHabilidad	:: modalHabilidad"></section>
+		<section th:replace="layout/modalTipo	:: modalTipo"></section>
+		<section th:replace="layout/modalEntrenar	:: modalEntrenar"></section>
+		
 		
 		<div class="d-grid gap-2 col-1 ms-auto me-5">
 			<a th:href="@{/}"  role="button" class="btn btn-outline-dark btn-sm">Regresar</a>
