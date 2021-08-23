@@ -12,5 +12,7 @@ public interface EvolucionService {
 	
 	public void eliminar(Evolucion evolucion);
 	
-	public Evolucion encontrarPokemon(Evolucion evolucion);
+	public Evolucion encontrarEvolucion(String string);
+	
+	public void eliminarPorNombre(String nombre);
 }

@@ -16,7 +16,7 @@ import pokedexLite.application.pokemon.Pokemon;
 public class PokemonServiceImpl implements PokemonService {
 	@Autowired
 	private PokemonDao pokemonDao;
-	
+	  
 	@Override
 	@Transactional(readOnly = true)
 	public List<Pokemon> listarPokemones() {

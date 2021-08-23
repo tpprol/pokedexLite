@@ -1,33 +1,31 @@
 <html xmlns:th="htpp://www.thymeleaf.org">
-	<head>
+<head>
 		<meta charset="UTF-8">
 		<!-- CSS only -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-	</head>
-	<body>
-	<div class="p-3 mb-2 bg-danger text-white bg-gradient bg-opacity-75">
-		<div class="jumbotron">
-  			<h1 class="text-center">Bienvenido a la Pokedex</h1>
-		</div>
-  			<p class="h4 text-center"> Listado de Pokemones en la Base de Datos</p>
-	</div>
-		<section th:replace="layout/navBar :: navBar"></section>
-		<div th:if="${pokemones != null and !pokemones.empty}" class="container col-5" style="left: 10%;">
-			<table class="table table-stripped table-bordered">
-				<tr class="bg-dark text-white bg-gradient">
-					<th>#</th>
-					<th>Nombre</th>
-					<th>Nivel</th>
-					<th>Mas informacion</th>
-				</tr>
-				<tr class="bg-light text-dark bg-gradient" th:each="pokemon, contador : ${pokemones}">
-					<td class="col-1">[[${contador.count}]]</td>
-					<td th:text="${pokemon.nombre}" class="col-3">nombre</td>
-					<td th:text="${pokemon.nivel}" class="col-1">nivel</td>
-					<td>Habilidades, Tipos, Evoluciones: <a th:href="@{/pokemon/} + ${pokemon.nombre}" role="button" class="btn btn-outline-primary">Ver Informacion</a></td>
-				</tr>
-			</table>
-		</div>
-		<section th:replace="layout/plantilla :: sriptsAgregados"></section>
+</head>
+<body class ="bg-secondary bg-opacity-25">
+	<section th:replace="layout/navBar :: navBar"></section>
+  			<p class="h4 text-center p-3"> Listado de Pokemones en la Base de Datos</p>
+  			
+			<div th:if="${pokemones != null and !pokemones.empty}" class="container col-7" style="left: 10%;">
+				<table class="table table-stripped table-bordered">
+					<tr class="bg-dark text-white bg-gradient">
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Nivel</th>
+						<th>Mas informacion</th>
+						<th></th>
+					</tr>
+					<tr class="bg-light text-dark bg-gradient" th:each="pokemon, contador : ${pokemones}">
+						<td class="col-1">[[${contador.count}]]</td>
+						<td th:text="${pokemon.nombre}" class="col-3">nombre</td>
+						<td th:text="${pokemon.nivel}" class="col-1">nivel</td>
+						<td>Habilidades, Tipos, Evoluciones: &nbsp; &nbsp; &nbsp; &nbsp; <a th:href="@{/pokemon/} + ${pokemon.nombre}" role="button" class="btn btn-outline-primary">Ver</a></td>
+						<td><a th:href="@{/eliminarPokemon/}+${pokemon.nombre}" role="button" class="btn btn-outline-danger">Eliminar</a></td>
+					</tr>
+				</table>
+			</div>
+		<section  th:replace="layout/plantilla :: sriptsAgregados"></section>
 	</body>
 </html>

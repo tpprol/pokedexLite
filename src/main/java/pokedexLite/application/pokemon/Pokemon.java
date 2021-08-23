@@ -82,6 +82,12 @@ public class Pokemon extends Evolucion {
 		return evoluciones.stream().min(Comparator.comparing(Evolucion::getNivel)).orElse(new Evolucion());
 	}
 	
+	public List<Evolucion> eliminarEvoluciones() {
+		List<Evolucion> evos = evoluciones;
+		evoluciones.clear();
+		return evos;
+	}
+	
 	public int getNivelNecesario() {
 		if(evoluciones.isEmpty())
 			return 0;

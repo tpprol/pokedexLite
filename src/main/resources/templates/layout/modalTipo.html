@@ -13,7 +13,7 @@
 							<h5 class="modal-title" id="agregarTipoLabel">Agregar Tipo a [[${pokemon.nombre}]]</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
-						<form th:action="@{/pokemon/} + ${pokemon.nombre}+@{/nuevoTipo}" method="post" th:object="${tipo}" class="was-validate">
+						<form th:action="@{/pokemon/} + ${evolucion.nombre}+@{/nuevoTipo}" method="post" th:object="${tipo}" class="was-validate">
 							<div class="modal-body">
 								<div class="form-group">
 								    <label for="validationDefault" class="form-label" th:text"#{tipo}">Tipo que se desea agregar</label>
@@ -29,5 +29,7 @@
 				</div>
 			</div>
 		</section>
+		
+		<section th:replace="layout/plantilla :: sriptsAgregados"></section>
 	</body>
 </html>

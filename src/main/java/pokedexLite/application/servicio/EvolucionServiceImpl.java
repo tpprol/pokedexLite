@@ -34,8 +34,14 @@ public class EvolucionServiceImpl implements EvolucionService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Evolucion encontrarPokemon(Evolucion evolucion) {
-		return evolucionDao.findById(evolucion.getNombre()).orElse(null);
+	public Evolucion encontrarEvolucion(String evolucion) {
+		return evolucionDao.findById(evolucion).orElse(null);
 	}
 
+	@Override
+	public void eliminarPorNombre(String nombre) {
+		Evolucion evolucion = this.encontrarEvolucion(nombre);
+		if(evolucion != null)
+			this.eliminar(evolucion);
+	}
 }

@@ -10,7 +10,7 @@ import pokedexLite.application.pokedex.Pokedex;
 import pokedexLite.application.pokemon.Evolucion;
 import pokedexLite.application.pokemon.Pokemon;
 
-public class llenadoTablas implements WithGlobalEntityManager {
+public class LlenadoTablas implements WithGlobalEntityManager {
 
 	@Test
 	public void llenado() {
